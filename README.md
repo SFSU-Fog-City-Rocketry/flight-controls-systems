@@ -10,3 +10,12 @@ To build the project. Run the following conan command:
 ```
 conan build . -b missing -s build_type=Debug
 ```
+
+
+## To Flash the ESP32
+
+```bash
+esptool.py --chip esp32 --port <port_value> --baud 460800 write_flash -z 0x1000 my_app.bin
+```
+
+
