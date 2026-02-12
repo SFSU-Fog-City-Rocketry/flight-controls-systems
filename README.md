@@ -12,10 +12,22 @@ conan build . -b missing -s build_type=Debug
 ```
 
 
-## To Flash the ESP32
+## Flashing the ESP32
 
-```bash
-esptool.py --chip esp32 --port <port_value> --baud 460800 write_flash -z 0x1000 my_app.bin
+> [!NOTE]
+> This needs to be tested for flashing. I am adding this for documenting.
+> Hoping to write some testing code to see if this'll work.
+
+### Installing esptool
+
+To install esp tool, do the following:
+
+```
+pipx install esptool
 ```
 
 
+### Flash
+```bash
+esptool.py --chip esp32 --port <port_value> --baud 460800 write_flash -z 0x1000 my_app.bin
+```
