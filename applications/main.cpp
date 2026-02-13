@@ -1,5 +1,4 @@
 #include <esp32/serial.hpp>
-#include <spanstream>
 #include <esp32/output_pin.hpp>
 #include <esp32/utils.hpp>
 
