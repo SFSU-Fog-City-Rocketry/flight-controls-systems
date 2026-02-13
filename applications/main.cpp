@@ -9,10 +9,10 @@ extern "C" void app_main() {
 
     while(true) {
         gpio2.level(true);
-        hal::esp32::delay(200);
+        hal::esp32::delay(20);
         
         gpio2.level(false);
-        hal::esp32::delay(200);
+        hal::esp32::delay(20);
     }
 
 }
