@@ -4,7 +4,7 @@
 #include <span>
 #include <vector>
 #include "driver/gpio.h"
-
+#include <spanstream>
 static constexpr const char* TAG = "APP";
 
 
@@ -16,9 +16,12 @@ void print_span(std::span<const uint8_t> p_data) {
 }
 
 // main entry point for application
-extern "C" void app_main(void) {
+extern "C" void app_main() {
     ESP_LOGI(TAG, "Starting ESP-IDF with LLVM/Clang...");
     auto gpio_2 = 2;
+    char buffer[] = "10 20 30";
+    std::ispanstream is(std::span<char>{buffer});
+    ESP_LOGI("ispanstream", "%s", is.span().data());
     while(true) {
         gpio_reset_pin(GPIO_NUM_2);
         gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);
@@ -33,4 +36,5 @@ extern "C" void app_main(void) {
     std::vector<uint8_t> payload = {0x1, 0x2, 0x3};
 
     print_span(payload);
+
 }
