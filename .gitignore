@@ -44,3 +44,4 @@
 .cache/
 *.json
 build/
+.pio/
