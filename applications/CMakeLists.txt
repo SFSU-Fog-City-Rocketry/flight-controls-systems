@@ -7,6 +7,7 @@ set(
     main.cpp
 
     ${PROJECT_DIR}/src/drivers/esp32/output_pin.cpp
+    ${PROJECT_DIR}/src/drivers/esp32/input_pin.cpp
     ${PROJECT_DIR}/src/drivers/esp32/steady_clock.cpp
     ${PROJECT_DIR}/src/drivers/esp32/utils.cpp
     ${PROJECT_DIR}/src/drivers/esp32/serial.cpp
