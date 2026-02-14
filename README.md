@@ -56,7 +56,7 @@ pio run -t upload
 | `UART` | `SPI` | `I2C` | CAN |
 | :--- | :---- | :--- | :---
 | Universe-Asynchronous-Receiver-Transceiver. <br> Does not need a shared clock for synchronizing <br> sending and receiving bytes of data. | Temp | Temp | Temp | Temp | Temp | Temp |
-| Order Management | Temp | Temp | Temp |
-| State Management | Temp | Temp | Temp |
-| Wait Logic | Temp | Temp | Temp |
-| Debugging | Temp | Temp | Temp |
+| Temp | Temp | Temp | Temp |
+| Temp | Temp | Temp | Temp |
+| Temp | Temp | Temp | Temp |
+| Temp | Temp | Temp | Temp |
