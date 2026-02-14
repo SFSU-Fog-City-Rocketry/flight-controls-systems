@@ -16,3 +16,9 @@ idf_component_register(
     SRCS ${app_sources}
     INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/../drivers
 )
+
+set(
+    modules_sources
+)
+
+set_source_files_properties(test.cppm PROPERTIES LANGUAGE CXX)

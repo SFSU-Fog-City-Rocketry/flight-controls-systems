@@ -1,5 +1,5 @@
 #pragma once
-#include <esp32/steady_clock.hpp>
+#include <cstdint>
 
 namespace hal::esp32 {
 
