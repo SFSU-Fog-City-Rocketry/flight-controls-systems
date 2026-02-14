@@ -41,7 +41,6 @@ pio run -t upload
 
 # Project Structure
 
-* `drivers/` will contain different subfolders. Each subfolder are going to represents either implementation towawrd specific driver to hal devices.
 * `drivers/` will contain different implementations of drivers. OR implementation for sensors that use those driver implementations.
 * `drivers/esp32/` is the hal abstraction for the `esp32-wroom-32` devices. This contains a modern C++ abstraction to interact with the esp32 devices. Including wrappers for serial communication, GPIO pins, and other forms of wrappers around the `espidf`.
 * `application/` represents where the application-side code will reside. This will be where any of the device interactive code will be contained.
