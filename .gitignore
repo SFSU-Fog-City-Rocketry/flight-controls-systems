@@ -45,3 +45,4 @@
 *.json
 build/
 .pio/
+sdkconfig.*

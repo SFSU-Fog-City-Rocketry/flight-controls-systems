@@ -10,6 +10,7 @@ set(
     ${PROJECT_DIR}/src/drivers/esp32/input_pin.cpp
     ${PROJECT_DIR}/src/drivers/esp32/utils.cpp
     ${PROJECT_DIR}/src/drivers/esp32/serial.cpp
+    ${PROJECT_DIR}/src/drivers/esp32/uart.cpp
 )
 
 idf_component_register(
