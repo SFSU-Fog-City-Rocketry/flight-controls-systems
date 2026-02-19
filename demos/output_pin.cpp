@@ -10,7 +10,9 @@ extern "C" void app_main() {
     while(true) {
 
         gpio2.level(true);
+        hal::esp32::print("Serial", "gpio level true");
         hal::esp32::delay(20);
+        hal::esp32::print("Serial", "gpio level false");
         gpio2.level(false);
         hal::esp32::delay(20);
     }
