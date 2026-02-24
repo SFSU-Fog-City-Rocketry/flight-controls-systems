@@ -5,9 +5,6 @@
 
 namespace hal::esp32 {
 
-
-
-
     uart::uart(/*NOLINT*/uint8_t p_port, std::span<uint8_t> p_receive_buffer, const settings& p_settings) : m_port(p_port), m_receive_buffer(p_receive_buffer.begin(), p_receive_buffer.end()) {
 
         uart_config_t uart_config = {};
