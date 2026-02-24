@@ -10,7 +10,6 @@ namespace hal::esp32 {
 
     uart::uart(/*NOLINT*/uint8_t p_port, std::span<uint8_t> p_receive_buffer, const settings& p_settings) : m_port(p_port), m_receive_buffer(p_receive_buffer.begin(), p_receive_buffer.end()) {
 
-        uart_driver_install(static_cast<uart_port_t>(m_port), p_receive_buffer.size(), p_receive_buffer.size_bytes(), 0, nullptr, 0);
         uart_config_t uart_config = {};
         uart_config.baud_rate = static_cast<int>(p_settings.baud_rate);
         uart_config.data_bits = static_cast<uart_word_length_t>(p_settings.word_length);
@@ -19,19 +18,24 @@ namespace hal::esp32 {
         uart_config.flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS;
         uart_config.rx_flow_ctrl_thresh = 0x7a;
 
+        uart_driver_install(static_cast<uart_port_t>(m_port), p_receive_buffer.size(), p_receive_buffer.size_bytes(), 0, nullptr, 0);
         uart_param_config(static_cast<uart_port_t>(m_port), &uart_config);
         uart_set_pin(static_cast<uart_port_t>(m_port), p_settings.tx, p_settings.rx, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     }
 
-    int uart::write(std::span<const uint8_t> p_buffer) {
+    void uart::set_loop_back(bool p_value) {
+        uart_set_loop_back(static_cast<uart_port_t>(m_port), true);
+    }
+
+    uint32_t uart::write(std::span<const uint8_t> p_buffer) {
         return uart_write_bytes(static_cast<uart_port_t>(m_port), p_buffer.data(), p_buffer.size());
     }
 
-    int uart::read(std::span<uint8_t> p_buffer) {
-        return uart_read_bytes(static_cast<uart_port_t>(m_port), p_buffer.data(), p_buffer.size(), 0);
+    uint32_t uart::read(std::span<uint8_t> p_in_buffer) {
+        return uart_read_bytes(static_cast<uart_port_t>(m_port), p_in_buffer.data(), p_in_buffer.size(), 0);
     }
 
-    size_t uart::read_length() {
+    uint32_t uart::read_length() {
         size_t length = 0;
         uart_get_buffered_data_len(static_cast<uart_port_t>(m_port), &length);
         return length;

@@ -25,6 +25,13 @@ namespace hal::esp32 {
     class uart {
     public:
         uart() = delete;
+        /**
+         * @brief Construct a new uart object
+         * 
+         * @param p_port is the port to do serial communication to
+         * @param p_receive_buffer is the buffer to pre-allocate buffer for passing
+         * @param p_settings 
+         */
         uart(uint8_t p_port, std::span<uint8_t> p_receive_buffer, const settings& p_settings);
 
         ~uart() = default;
@@ -33,11 +40,35 @@ namespace hal::esp32 {
         uart(uart&&) = delete;
         uart& operator=(uart&&) = delete;
 
-        int write(std::span<const uint8_t> p_buffer);
+        /**
+         * @brief Set the loop back object for the particular port with this uart driver
+         * 
+         * @param p_value is true to enable lookback, otherwise false to disable
+         */
+        void set_loop_back(bool p_value);
 
-        int read(std::span<uint8_t> p_buffer);
+        /**
+         * @brief transmitting bytes of data
+         * 
+         * @param p_buffer 
+         * @return uint32_t
+         */
+        uint32_t write(std::span<const uint8_t> p_buffer);
 
-        size_t read_length();
+        /**
+         * @brief 
+         * 
+         * @param p_in_buffer 
+         * @return uint32_t 
+         */
+        uint32_t read(std::span<uint8_t> p_in_buffer);
+
+        /**
+         * @brief Reading the available length for writing a buffer
+         * 
+         * @return uint32_t
+         */
+        uint32_t read_length();
 
     private:
         uint8_t m_port;
