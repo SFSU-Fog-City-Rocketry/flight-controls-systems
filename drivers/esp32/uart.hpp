@@ -5,7 +5,6 @@
 
 namespace hal::esp32 {
 
-
     enum parity : uint8_t {
         disable = 0x0,
         odd = 0x1,
@@ -16,8 +15,7 @@ namespace hal::esp32 {
         uint32_t baud_rate=115200;
         uint8_t word_length=0x3; // 0: 5 bits, 1: 6 bits, 2: 7 bits, 3: 8 bits
         uint8_t stop_bit=0x1;
-        // uint8_t parity=0; // 0: None, 1: Odd, 2: Even
-        enum parity parity=parity::disable;
+        parity parity_bit=parity::disable; // 0: None, 1: Odd, 2: Even
         uint8_t tx=0;
         uint8_t rx=0;
     };
@@ -50,25 +48,25 @@ namespace hal::esp32 {
         /**
          * @brief transmitting bytes of data
          * 
-         * @param p_buffer 
-         * @return uint32_t
+         * @param p_buffer are the bytes to write
+         * @return int32_t returns -1 if invalid bytes written, otherwise returns the length of bytes written
          */
-        uint32_t write(std::span<const uint8_t> p_buffer);
+        int32_t write(std::span<const uint8_t> p_in_buffer);
 
         /**
          * @brief 
          * 
-         * @param p_in_buffer 
-         * @return uint32_t 
+         * @param p_in_buffer is the buffer to read
+         * @return int32_t returns -1 if invalid bytes written, otherwise returns the length of bytes written
          */
-        uint32_t read(std::span<uint8_t> p_in_buffer);
+        int32_t read(std::span<uint8_t> p_out_buffer);
 
         /**
          * @brief Reading the available length for writing a buffer
          * 
-         * @return uint32_t
+         * @return int32_t returns -1 if invalid bytes written, otherwise returns the length of bytes written
          */
-        uint32_t read_length();
+        int32_t read_length();
 
     private:
         uint8_t m_port;
