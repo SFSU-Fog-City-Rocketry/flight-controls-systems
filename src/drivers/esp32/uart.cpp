@@ -12,10 +12,10 @@ namespace hal::esp32 {
         uart_config.data_bits = static_cast<uart_word_length_t>(p_settings.word_length);
         uart_config.parity = static_cast<uart_parity_t>(p_settings.parity_bit);
         uart_config.stop_bits = static_cast<uart_stop_bits_t>(p_settings.stop_bit);
-        uart_config.flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS;
+        uart_config.flow_ctrl = static_cast<uart_hw_flowcontrol_t>(p_settings.control_mode);
         uart_config.rx_flow_ctrl_thresh = 0x7a;
 
-        uart_driver_install(static_cast<uart_port_t>(m_port), static_cast<int>(m_receive_buffer.size()), static_cast<int>(m_receive_buffer.size()), 0, nullptr, 0);
+        uart_driver_install(static_cast<uart_port_t>(m_port), static_cast<int>(p_receive_buffer.size()), static_cast<int>(p_receive_buffer.size_bytes()), 0, nullptr, 0);
         uart_param_config(static_cast<uart_port_t>(m_port), &uart_config);
         uart_set_pin(static_cast<uart_port_t>(m_port), p_settings.tx, p_settings.rx, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     }

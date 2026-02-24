@@ -11,11 +11,20 @@ namespace hal::esp32 {
         even = 0x2
     };
 
+    enum class flow_control_mode : uint8_t {
+        disable=0x0, // disable hardware flow control
+        rts=0x1,     // enable RX hardware flow control (rts)
+        cts=0x2,     // enable TX hardware flow control  (cts)
+        cts_rts=0x3, // enable hardware flow control
+        max=0x4
+    };
+
     struct settings {
         uint32_t baud_rate=115200;
         uint8_t word_length=0x3; // 0: 5 bits, 1: 6 bits, 2: 7 bits, 3: 8 bits
         uint8_t stop_bit=0x1;
         parity parity_bit=parity::disable; // 0: None, 1: Odd, 2: Even
+        flow_control_mode control_mode=flow_control_mode::cts_rts;
         uint8_t tx=0;
         uint8_t rx=0;
     };
