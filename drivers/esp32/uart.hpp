@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <span>
+
+#include <esp32/serial.hpp>
 #include <nonstd/ring_span.hpp>
 
 namespace hal::esp32 {
@@ -60,7 +62,7 @@ namespace hal::esp32 {
          * @param p_buffer are the bytes to write
          * @return int32_t returns -1 if invalid bytes written, otherwise returns the length of bytes written
          */
-        int32_t write(std::span<const uint8_t> p_in_buffer);
+        serial::message write(std::span<uint8_t> p_in_buffer);
 
         /**
          * @brief 
@@ -68,8 +70,7 @@ namespace hal::esp32 {
          * @param p_in_buffer is the buffer to read
          * @return int32_t returns -1 if invalid bytes written, otherwise returns the length of bytes written
          */
-        int32_t read(std::span<uint8_t> p_out_buffer);
-
+        serial::message read(std::span<uint8_t> p_out_bytes);
         /**
          * @brief Reading the available length for writing a buffer
          * 

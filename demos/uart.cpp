@@ -3,6 +3,7 @@
 #include <esp32/utils.hpp>
 #include <esp32/uart.hpp>
 #include <array>
+#include <span>
 
 extern "C" void app_main() {
     hal::esp32::print("Serial", "Demo Application Initiated!");
@@ -17,9 +18,9 @@ extern "C" void app_main() {
     while(true) {
 
         std::array<uint8_t, 3> payload = {0x1, 0x2, 0x3};
-        const int bytes_written = uart_console.write(payload);
+        hal::esp32::serial::message msg = uart_console.write(payload);
         hal::esp32::delay(20);
-        hal::esp32::print("Sent", "Wrote %d bytes", bytes_written);
+        hal::esp32::print("Sent", "Wrote %d bytes", msg.capacity);
 
         std::array<uint8_t, 3> payload_read{};
 

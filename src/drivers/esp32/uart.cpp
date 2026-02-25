@@ -2,6 +2,7 @@
 #include "driver/uart.h"
 #include "hal/uart_types.h"
 #include <esp32/serial.hpp>
+#include <span>
 
 namespace hal::esp32 {
 
@@ -24,12 +25,23 @@ namespace hal::esp32 {
         uart_set_loop_back(static_cast<uart_port_t>(m_port), true);
     }
 
-    int32_t uart::write(std::span<const uint8_t> p_in_buffer) {
-        return uart_write_bytes(static_cast<uart_port_t>(m_port), p_in_buffer.data(), p_in_buffer.size());
+    serial::message uart::write(std::span<uint8_t> p_in_buffer) {
+        int capacity = uart_write_bytes(static_cast<uart_port_t>(m_port), p_in_buffer.data(), p_in_buffer.size());
+
+        return {
+            .data = p_in_buffer,
+            .capacity = static_cast<uint32_t>(capacity),
+        };
     }
 
-    int32_t uart::read(std::span<uint8_t> p_out_buffer) {
-        return uart_read_bytes(static_cast<uart_port_t>(m_port), p_out_buffer.data(), p_out_buffer.size(), 0);
+    serial::message uart::read(std::span<uint8_t> p_out_bytes) {
+
+        const int capacity = uart_read_bytes(static_cast<uart_port_t>(m_port), p_out_bytes.data(), p_out_bytes.size(), 0);
+
+        return {
+            .data = p_out_bytes.subspan(0, m_receive_buffer.size()),
+            .capacity = static_cast<uint32_t>(capacity),
+        };
     }
 
     int32_t uart::read_length() {
