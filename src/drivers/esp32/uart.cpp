@@ -35,6 +35,6 @@ namespace hal::esp32 {
     int32_t uart::read_length() {
         size_t length = 0;
         uart_get_buffered_data_len(static_cast<uart_port_t>(m_port), &length);
-        return length;
+        return static_cast<int32_t>(length);
     }
 };
