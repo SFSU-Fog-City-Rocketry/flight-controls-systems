@@ -1,8 +1,6 @@
 #include <esp32/uart.hpp>
 #include "driver/uart.h"
 #include "hal/uart_types.h"
-#include <esp32/serial.hpp>
-#include <span>
 
 namespace hal::esp32 {
 
@@ -18,6 +16,7 @@ namespace hal::esp32 {
 
         uart_driver_install(static_cast<uart_port_t>(m_port), static_cast<int>(p_receive_buffer.size()), static_cast<int>(p_receive_buffer.size_bytes()), 0, nullptr, 0);
         uart_param_config(static_cast<uart_port_t>(m_port), &uart_config);
+        // uart_set_mode(static_cast<uint64_t>(p_port), static_cast<uart_mode_t>(p_settings.mode));
         uart_set_pin(static_cast<uart_port_t>(m_port), p_settings.tx, p_settings.rx, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     }
 
