@@ -17,13 +17,14 @@ extern "C" void app_main() {
 
     while(true) {
 
+        // Writing a payload through uart
         std::array<uint8_t, 3> payload = {0x1, 0x2, 0x3};
         hal::esp32::serial::message msg = uart_console.write(payload);
         hal::esp32::delay(20);
         hal::esp32::print("Sent", "Wrote %d bytes", msg.capacity);
 
+        // Reading transmitted data to TX.
         std::array<uint8_t, 3> payload_read{};
-
         uart_console.read(payload_read);
         for(size_t i = 0; i < payload_read.size(); i++) {
             hal::esp32::print("Received", "I = %i", payload_read[i]);
