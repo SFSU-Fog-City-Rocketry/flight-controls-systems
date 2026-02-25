@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+
+.cache/
+*.json
+build/
+.pio/
+sdkconfig.*
