@@ -30,7 +30,7 @@ pipx install platformio
 * `application/` represents where the application-side code will reside. This will be where any of the device interactive code will be contained.
 * `demos/` contains example code to communicate over various serial communication protocols. These demos are demonstrations in using the API's for communicating sending/receiving data.
 
-# Building the Demos with PlatformIO
+# How to build the Demos
 
 To build a specific demo, run the following command:
 
@@ -46,7 +46,11 @@ Use the following command:
 pio run -e output_pin
 ```
 
-# Flashing Specific Demo
+# Flashing the Demos
+
+These are commands to both build and flash any specific demos to the esp32 embedded devices.
+
+## How to flash specific demo
 
 The flash command will be in this format:
 
@@ -58,6 +62,20 @@ Example for flashing output pin code:
 
 ```
 pio run -e output_pin -t upload
+```
+
+## Flashing Specific Port
+
+To flash to a specific serial device port, do the following:
+
+```
+pio run -e output_pin -t upload --upload-port <port>
+```
+
+If your device is, lets say `/dev/ttyS0`. This is how the port is specified:
+
+```
+pio run -e output_pin -t upload --upload-port /dev/ttyS0
 ```
 
 # Brief Context
