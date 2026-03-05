@@ -60,6 +60,20 @@ Example for flashing output pin code:
 pio run -e output_pin -t upload
 ```
 
+### Flashing Specific Port
+
+To flash to a specific serial device port, do the following:
+
+```
+pio run -e output_pin -t upload --upload-port <port>
+```
+
+If your device is, lets say `/dev/ttyS0`. This is how the port is specified:
+
+```
+pio run -e output_pin -t upload --upload-port /dev/ttyS0
+```
+
 # Brief Context
 
 > [!NOTE]
