@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+#include <span>
+#include <esp32/errors.hpp>
 
 namespace hal::esp32 {
 
@@ -8,6 +10,14 @@ namespace hal::esp32 {
         normal = 0,
         listen_only = 1,
         self_test = 2
+    };
+
+
+    struct can_message {
+        uint32_t id;
+        std::span<const uint8_t> data;
+        uint8_t data_length;
+        uint8_t ticks=0x00;
     };
 
     class can {
@@ -27,8 +37,11 @@ namespace hal::esp32 {
             configure(p_settings);
         }
 
+        ~can();
+
         void configure(const settings& p_settings);
 
+        can_error_type transmit(std::span<const can_message>);
 
         [[nodiscard]] bool is_ready() const {
             return m_ready;

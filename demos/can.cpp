@@ -1,3 +1,4 @@
+#include "esp32/errors.hpp"
 #include <hal/uart_types.h>
 #include <esp32/serial.hpp>
 #include <esp32/utils.hpp>
@@ -16,6 +17,13 @@ extern "C" void app_main() {
     while(true) {
 
         hal::esp32::print("CAN", "Is CAN bus ready? %s", can_bus.is_ready() ? "Yes" : "No");
+        hal::esp32::can_error_type error = can_bus.transmit({});
+
+
+        if(error != hal::esp32::can_error_type::ok) {
+            hal::esp32::print("CAN", "Error occurred during CAN transfer: %u", static_cast<uint32_t>(error));
+        }
+        
         hal::esp32::delay(20);
     }
 }
