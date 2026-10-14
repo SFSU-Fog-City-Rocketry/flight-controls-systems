@@ -23,7 +23,7 @@ extern "C" void app_main() {
         if(error != hal::esp32::can_error_type::ok) {
             hal::esp32::print("CAN", "Error occurred during CAN transfer: %u", static_cast<uint32_t>(error));
         }
-        
+
         hal::esp32::delay(20);
     }
 }
