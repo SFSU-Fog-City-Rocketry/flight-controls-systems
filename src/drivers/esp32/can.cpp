@@ -1,5 +1,6 @@
 #include <esp32/can.hpp>
 #include "driver/twai.h"
+#include "hal/twai_types_deprecated.h"
 #include <esp32/can_utils.hpp>
 #include <chrono>
 
@@ -80,5 +81,28 @@ namespace hal::esp32 {
         const auto res = twai_transmit(&message, pdMS_TO_TICKS(1000));
 
         return static_cast<can_error_type>(res);
+    }
+
+
+    std::optional<can_message> can::receive() {
+        // twai_message_t message;
+        // if (twai_receive(&message, pdMS_TO_TICKS(10000)) == ESP_OK) {
+        //     printf("Message received\n");
+        // }
+        // else {
+        //     printf("Failed to receive message\n");
+        //     return;
+        // }
+
+        twai_message_t message;
+        if (twai_receive(&message, pdMS_TO_TICKS(10000)) == ESP_OK) {
+            can_message received_message;
+            received_message.id = message.identifier;
+            received_message.data_length = message.data_length_code;
+            received_message.data = std::span<const uint8_t>(message.data, message.data_length_code);
+            return received_message;
+        }
+
+        return {};
     }
 };

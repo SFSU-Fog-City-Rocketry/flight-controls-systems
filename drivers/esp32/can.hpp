@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <span>
+#include <optional>
 #include <esp32/errors.hpp>
 
 namespace hal::esp32 {
@@ -42,6 +43,9 @@ namespace hal::esp32 {
         void configure(const settings& p_settings);
 
         can_error_type transmit(std::span<const can_message>);
+
+
+        std::optional<can_message> receive();
 
         [[nodiscard]] bool is_ready() const {
             return m_ready;
