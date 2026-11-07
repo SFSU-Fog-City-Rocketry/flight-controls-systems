@@ -1,1 +1,6 @@
 .pio
+.cache/
+.vscode/
+CMakeUserPresets.json
+build/
+compile_commands.json
