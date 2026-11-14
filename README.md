@@ -1,5 +1,8 @@
 ## Flights Control Systems
 
+## Setting up Conan
+
+Follow the [getting started](https://engine3d-dev.github.io/0.1/getting_started/) page that I use for a separate open-source project. The getting started up until you reach the Conan profiles step, and continue the remaining steps from this README.
 
 ## Setting up Conan Profiles
 
