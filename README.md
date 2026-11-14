@@ -7,6 +7,20 @@
 conan config install https://github.com/SFSU-Fog-City-Rocketry/conan-config.git
 ```
 
+## Before Building this Repo do the following
+
+
+Just call these two commandline commands
+
+```
+conan remote add engine3d-conan https://libhal.jfrog.io/artifactory/api/conan/engine3d-conan
+```
+
+
+```
+conan remote add libhal-trunk https://libhal.jfrog.io/artifactory/api/conan/trunk-conan
+```
+
 ## How to Build
 
 
